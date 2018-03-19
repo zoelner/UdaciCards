@@ -1,5 +1,5 @@
 import { default as DeckList } from './DeckList'
-import { default as NewDeck } from './NewDeck'
+import { default as AddDeck } from './AddDeck'
 
 
-export { DeckList, NewDeck }
+export { DeckList, AddDeck }

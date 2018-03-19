@@ -1,15 +1,14 @@
-import React from "react";
+import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { DeckList, NewDeck } from './screen/';
+import { DeckList, AddDeck } from './screen/';
 
 
 const Tabs = TabNavigator({
     Decks: {
         screen: DeckList
     },
-    'New Deck': {
-        screen: NewDeck,
-        tabBarLabel: 'Whataver'
+    'Add Deck': {
+        screen: AddDeck,
     },
 }, {
         navigationOptions: {
@@ -30,7 +29,5 @@ const Tabs = TabNavigator({
     })
 
 export const MainNavigator = StackNavigator({
-    Home: {
-        screen: Tabs,
-    },
+    Main: { screen: Tabs },
 })
