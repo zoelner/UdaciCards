@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
-import { getDeck, getDecks } from "./../api";
-import { toArray } from "./../helpers";
+import { Text, View, TouchableOpacity } from "react-native";
+import { getDeck, getDecks } from "../utils/api";
+import { toArray } from "../utils/helpers";
 
 class DeckDetail extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { id } = navigation.state.params;
+    return {
+      title: `${id} details`
+    };
+  };
   state = {
     data: null,
     isLoading: true
@@ -20,9 +26,30 @@ class DeckDetail extends Component {
     return (
       <View>
         <Text>{data.title}</Text>
-        {data.questions.map((question, index) => (
-          <Text key={index}>{question.question}</Text>
-        ))}
+        <Text>
+          {this.props.navigation.state.params.questions}
+          {this.props.navigation.state.params.questions === 1
+            ? " question"
+            : " questions"}
+        </Text>
+        <TouchableOpacity
+          onPress={() =>
+            this.props.navigation.navigate("AddQuestion", {
+              title: this.props.navigation.state.params.id
+            })
+          }
+        >
+          <Text>ADD Question</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            this.props.navigation.navigate("Quiz", {
+              id: this.props.navigation.state.params.id
+            })
+          }
+        >
+          <Text>Start Quiz</Text>
+        </TouchableOpacity>
       </View>
     );
   }
