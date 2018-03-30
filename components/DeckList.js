@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
 import { FlatList, AsyncStorage, TouchableOpacity } from "react-native";
-import { QUIZ_STORAGE_KEY, getDecks } from "./../api";
+import { QUIZ_STORAGE_KEY, getDecks } from "../utils/api";
 import Deck from "./Deck";
-import { toArray } from "../helpers";
+import { toArray } from "../utils/helpers";
 
 class DeckList extends Component {
   state = {
