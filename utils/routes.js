@@ -1,6 +1,12 @@
 import React from "react";
 import { TabNavigator, StackNavigator } from "react-navigation";
-import { DeckList, AddDeck, DeckDetail } from "../components";
+import {
+  DeckList,
+  AddDeck,
+  DeckDetail,
+  AddQuestion,
+  Quiz
+} from "../components";
 
 const Tabs = TabNavigator(
   {
@@ -32,5 +38,7 @@ const Tabs = TabNavigator(
 
 export const MainNavigator = StackNavigator({
   Main: { screen: Tabs },
-  DeckDetail: { screen: DeckDetail }
+  DeckDetail: { screen: DeckDetail },
+  AddQuestion: { screen: AddQuestion },
+  Quiz: { screen: Quiz }
 });
