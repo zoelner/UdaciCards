@@ -27,8 +27,8 @@ class AddDeck extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.name}> Name </Text>
+      <View style={{}}>
+        <Text style={{}}> Name </Text>
         <TextInput onChangeText={text => this.setState({ text })} />
         <Button
           title="Create Deck"
@@ -38,10 +38,5 @@ class AddDeck extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
-  name: { alignItems: "stretch" }
-});
 
 export default AddDeck;

@@ -12,18 +12,17 @@ class DeckDetail extends Component {
   };
   state = {
     data: null,
-    isLoading: true
+    isReady: false
   };
 
   async componentDidMount() {
     const data = await getDeck(this.props.navigation.state.params.id);
-    this.setState({ data, isLoading: false });
+    this.setState({ data, isReady: true });
   }
 
   render() {
-    const { data, isLoading } = this.state;
-    if (isLoading) return <Text>Loading...</Text>;
-    return (
+    const { data, isReady } = this.state;
+    return isReady ? (
       <View>
         <Text>{data.title}</Text>
         <Text>
@@ -51,6 +50,8 @@ class DeckDetail extends Component {
           <Text>Start Quiz</Text>
         </TouchableOpacity>
       </View>
+    ) : (
+      <Text>Loading...</Text>
     );
   }
 }
