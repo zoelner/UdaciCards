@@ -25,13 +25,11 @@ class DeckList extends Component {
 
   render() {
     return this.state.isReady ? (
-      <View>
-        <FlatList
-          data={this.state.data}
-          renderItem={this._renderItem}
-          keyExtractor={this._keyExtractor}
-        />
-      </View>
+      <FlatList
+        data={this.state.data}
+        renderItem={this._renderItem}
+        keyExtractor={this._keyExtractor}
+      />
     ) : (
       <Text>Loading...</Text>
     );

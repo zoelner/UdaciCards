@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { COLOR_BLACK, COLOR_WHITE, COLOR_GRAY } from "../utils/helpers";
 
 class Deck extends Component {
   render() {
@@ -29,19 +30,18 @@ class Deck extends Component {
 const styles = StyleSheet.create({
   deck: {
     flex: 1,
-    backgroundColor: "#ffffff"
+    backgroundColor: COLOR_WHITE
   },
   deckContent: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ffffff",
     padding: 50,
-    borderBottomColor: "#5a5a5a",
+    borderBottomColor: COLOR_BLACK,
     borderBottomWidth: 1
   },
   title: {
-    color: "#333333",
+    color: COLOR_GRAY,
     fontSize: 25
   }
 });
