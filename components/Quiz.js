@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import { getDeck } from "../utils/api";
+import { NavigationActions } from "react-navigation";
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -11,7 +12,7 @@ class Quiz extends Component {
 
   state = {
     deck: null,
-    correct: 0,
+    correct: null,
     currentQuestion: 0,
     showAnswer: false,
     isReady: false
@@ -43,6 +44,25 @@ class Quiz extends Component {
     });
   }
 
+  restartQuiz() {
+    this.props.navigation.dispatch(
+      NavigationActions.navigate({
+        routeName: "DeckDetail",
+        params: { id: this.props.navigation.state.params.id },
+        action: NavigationActions.navigate({ routeName: "DeckDetail" })
+      })
+    );
+  }
+
+  exit() {
+    this.props.navigation.dispatch(
+      NavigationActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: "Main" })]
+      })
+    );
+  }
+
   render() {
     const { isReady, deck, correct, currentQuestion } = this.state;
 
@@ -50,22 +70,22 @@ class Quiz extends Component {
 
     if (deck.questions.length === currentQuestion) {
       return (
-        <View>
+        <View style={styles.container}>
           <Text>
             {"You have answered  "}
-            {Math.floor(correct / deck.questions.length * 100)}% of the
-            questions
+            {correct & Math.floor(correct / deck.questions.length * 100)}% of
+            the questions
           </Text>
           <View>
-            <Button onPress={() => null} title="Restart" />
-            <Button onPress={() => null} title="Exit" />
+            <Button onPress={() => this.restartQuiz()} title="Restart" />
+            <Button onPress={() => this.exit()} title="Exit" />
           </View>
         </View>
       );
     }
 
     return (
-      <View>
+      <View style={styles.container}>
         <Text>
           {currentQuestion + 1}/{deck.questions.length}
         </Text>
@@ -80,5 +100,11 @@ class Quiz extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10
+  }
+});
 
 export default Quiz;

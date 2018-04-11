@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import { addCardToDeck } from "../utils/api";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity
-} from "react-native";
+import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import { NavigationActions } from "react-navigation";
 
 class AddQuestion extends Component {
@@ -42,7 +36,7 @@ class AddQuestion extends Component {
 
   render() {
     return (
-      <View style={{}}>
+      <View style={styles.container}>
         <TextInput
           style={{}}
           onChangeText={question => this.setState(() => ({ question }))}
@@ -55,12 +49,16 @@ class AddQuestion extends Component {
           value={this.state.answer}
           placeholder="Answer"
         />
-        <TouchableOpacity style={{}} onPress={() => this.handleSubmit()}>
-          <Text style={{}}>Submit</Text>
-        </TouchableOpacity>
+        <Button onPress={() => this.handleSubmit()} title="Submit" />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10
+  }
+});
 
 export default AddQuestion;

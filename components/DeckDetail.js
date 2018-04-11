@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, Button, StyleSheet } from "react-native";
 import { getDeck, getDecks } from "../utils/api";
 import { toArray } from "../utils/helpers";
 
@@ -23,7 +23,7 @@ class DeckDetail extends Component {
   render() {
     const { data, isReady } = this.state;
     return isReady ? (
-      <View>
+      <View style={styles.container}>
         <Text>{data.title}</Text>
         <Text>
           {this.props.navigation.state.params.questions}
@@ -31,29 +31,33 @@ class DeckDetail extends Component {
             ? " question"
             : " questions"}
         </Text>
-        <TouchableOpacity
+        <Button
           onPress={() =>
             this.props.navigation.navigate("AddQuestion", {
               title: this.props.navigation.state.params.id
             })
           }
-        >
-          <Text>ADD Question</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+          title="ADD Question"
+        />
+        <Button
           onPress={() =>
             this.props.navigation.navigate("Quiz", {
               id: this.props.navigation.state.params.id
             })
           }
-        >
-          <Text>Start Quiz</Text>
-        </TouchableOpacity>
+          title="Start Quiz"
+        />
       </View>
     ) : (
       <Text>Loading...</Text>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10
+  }
+});
 
 export default DeckDetail;

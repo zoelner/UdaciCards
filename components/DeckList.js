@@ -19,20 +19,23 @@ class DeckList extends Component {
 
   async componentDidMount() {
     const data = await getDecks();
-    this.setState({ data: toArray(data) });
-    if (this.state.data) this.setState({ isReady: true });
+    await this.setState({ data: toArray(data) });
+    if (this.state.data)
+      setTimeout(() => this.setState({ isReady: true }), 500);
   }
 
   render() {
-    return this.state.isReady ? (
-      <FlatList
-        data={this.state.data}
-        renderItem={this._renderItem}
-        keyExtractor={this._keyExtractor}
-      />
-    ) : (
-      <Text>Loading...</Text>
-    );
+    if (this.state.isReady) {
+      return (
+        <FlatList
+          data={this.state.data}
+          renderItem={this._renderItem}
+          keyExtractor={this._keyExtractor}
+        />
+      );
+    } else {
+      return <Text>Loading...</Text>;
+    }
   }
 }
 
