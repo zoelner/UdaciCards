@@ -3,12 +3,16 @@ import { View, StatusBar } from "react-native";
 import { MainNavigator } from "./utils/routes";
 import { Constants, AppLoading } from "expo";
 import { initialData } from "./utils/api";
+import { setLocalNotification } from "./utils/helpers";
 
 export default class App extends React.Component {
   state = {
     isReady: false
   };
 
+  componentDidMount() {
+    setLocalNotification();
+  }
   async _cacheResourcesAsync() {
     await Promise.all(initialData());
   }

@@ -71,7 +71,7 @@ class Quiz extends Component {
     if (deck.questions.length === currentQuestion) {
       return (
         <View style={styles.container}>
-          <Text>
+          <Text style={[styles.text, { fontWeight: "bold" }]}>
             {"You have answered  "}
             {correct & Math.floor(correct / deck.questions.length * 100)}% of
             the questions
@@ -86,12 +86,16 @@ class Quiz extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>
+        <Text style={styles.titleText}>
           {currentQuestion + 1}/{deck.questions.length}
         </Text>
-        <Text>{deck.questions[currentQuestion].question}</Text>
+        <Text style={styles.text}>
+          {deck.questions[currentQuestion].question}
+        </Text>
         {this.state.showAnswer && (
-          <Text> {deck.questions[currentQuestion].answer}</Text>
+          <Text style={styles.text}>
+            {deck.questions[currentQuestion].answer}
+          </Text>
         )}
         <Button onPress={() => this.showAnswer()} title="Show Answer" />
         <Button onPress={() => this.correctAnswer()} title="Correct" />
@@ -103,6 +107,14 @@ class Quiz extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 10
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: "bold"
+  },
+  text: {
+    fontSize: 15,
     padding: 10
   }
 });

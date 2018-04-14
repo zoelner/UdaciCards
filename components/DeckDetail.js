@@ -24,8 +24,8 @@ class DeckDetail extends Component {
     const { data, isReady } = this.state;
     return isReady ? (
       <View style={styles.container}>
-        <Text>{data.title}</Text>
-        <Text>
+        <Text style={styles.titleText}>{data.title}</Text>
+        <Text style={styles.titleText}>
           {this.props.navigation.state.params.questions}
           {this.props.navigation.state.params.questions === 1
             ? " question"
@@ -53,10 +53,29 @@ class DeckDetail extends Component {
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
-    padding: 10
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "space-around"
+  },
+  answerBtn: {
+    backgroundColor: "green",
+    color: "white",
+    paddingTop: 12,
+    paddingBottom: 12,
+    width: 250,
+    borderRadius: 10,
+    margin: 4,
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: "bold",
+    overflow: "hidden"
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: "bold"
   }
 });
 
