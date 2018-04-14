@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { addCardToDeck } from "../utils/api";
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import { NavigationActions } from "react-navigation";
+import { COLOR_WHITE, COLOR_GRAY } from "./../utils/helpers";
 
 class AddQuestion extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -38,13 +39,13 @@ class AddQuestion extends Component {
     return (
       <View style={styles.container}>
         <TextInput
-          style={{}}
+          style={styles.input}
           onChangeText={question => this.setState(() => ({ question }))}
           value={this.state.question}
           placeholder="Question"
         />
         <TextInput
-          style={{}}
+          style={styles.input}
           onChangeText={answer => this.setState(() => ({ answer }))}
           value={this.state.answer}
           placeholder="Answer"
@@ -57,7 +58,18 @@ class AddQuestion extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10
+    justifyContent: "center",
+    marginTop: 50,
+    padding: 20,
+    backgroundColor: COLOR_WHITE
+  },
+  input: {
+    margin: 15,
+    padding: 10,
+    height: 40,
+    borderColor: COLOR_GRAY,
+    borderWidth: 1,
+    borderRadius: 5
   }
 });
 
