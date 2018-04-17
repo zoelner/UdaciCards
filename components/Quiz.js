@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { getDeck } from "../utils/api";
 import { NavigationActions } from "react-navigation";
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from "./../utils/helpers";
+import Results from "./Results";
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -12,7 +17,7 @@ class Quiz extends Component {
 
   state = {
     deck: null,
-    correct: null,
+    correct: 0,
     currentQuestion: 0,
     showAnswer: false,
     isReady: false
@@ -23,6 +28,7 @@ class Quiz extends Component {
       deck: await getDeck(this.props.navigation.state.params.id),
       isReady: true
     });
+    clearLocalNotification().then(setLocalNotification);
   }
 
   async nextQuestion() {
@@ -44,25 +50,6 @@ class Quiz extends Component {
     });
   }
 
-  restartQuiz() {
-    this.props.navigation.dispatch(
-      NavigationActions.navigate({
-        routeName: "DeckDetail",
-        params: { id: this.props.navigation.state.params.id },
-        action: NavigationActions.navigate({ routeName: "DeckDetail" })
-      })
-    );
-  }
-
-  exit() {
-    this.props.navigation.dispatch(
-      NavigationActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: "Main" })]
-      })
-    );
-  }
-
   render() {
     const { isReady, deck, correct, currentQuestion } = this.state;
 
@@ -70,17 +57,12 @@ class Quiz extends Component {
 
     if (deck.questions.length === currentQuestion) {
       return (
-        <View style={styles.container}>
-          <Text style={[styles.text, { fontWeight: "bold" }]}>
-            {"You have answered  "}
-            {correct & Math.floor(correct / deck.questions.length * 100)}% of
-            the questions
-          </Text>
-          <View>
-            <Button onPress={() => this.restartQuiz()} title="Restart" />
-            <Button onPress={() => this.exit()} title="Exit" />
-          </View>
-        </View>
+        <Results
+          correct={this.state.correct}
+          questions={deck.questions.length}
+          id={this.props.navigation.state.params.id}
+          navigation={this.props.navigation}
+        />
       );
     }
 
