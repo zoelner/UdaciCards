@@ -21,7 +21,7 @@ class AddQuestion extends Component {
     const { title } = this.props.navigation.state.params;
     const { question, answer } = this.state;
     if (!question || !answer) {
-      console.log("Campos não preenchidos ");
+      alert("Favor preencher todos os campos!");
       return;
     }
 
