@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { NavigationActions } from "react-navigation";
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from "./../utils/helpers";
 
 class Results extends Component {
+  componentDidMount() {
+    clearLocalNotification().then(setLocalNotification);
+  }
+
   backToDeck() {
     this.props.navigation.dispatch(
       NavigationActions.navigate({
