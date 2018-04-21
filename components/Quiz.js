@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { getDeck } from "../utils/api";
 import { NavigationActions } from "react-navigation";
-import {
-  clearLocalNotification,
-  setLocalNotification
-} from "./../utils/helpers";
+
 import Results from "./Results";
 
 class Quiz extends Component {
@@ -28,7 +25,6 @@ class Quiz extends Component {
       deck: await getDeck(this.props.navigation.state.params.id),
       isReady: true
     });
-    clearLocalNotification().then(setLocalNotification);
   }
 
   async nextQuestion() {
@@ -79,7 +75,11 @@ class Quiz extends Component {
             {deck.questions[currentQuestion].answer}
           </Text>
         )}
-        <Button onPress={() => this.showAnswer()} title="Show Answer" />
+        {this.state.showAnswer ? (
+          <Button onPress={() => this.showAnswer()} title="Hide" />
+        ) : (
+          <Button onPress={() => this.showAnswer()} title="Show Answer" />
+        )}
         <Button onPress={() => this.correctAnswer()} title="Correct" />
         <Button onPress={() => this.nextQuestion()} title="Incorrect" />
       </View>
