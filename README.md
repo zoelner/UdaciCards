@@ -1,10 +1,12 @@
 # Instalação
 
 * Clonar Repositório
-```git clone https://github.com/zoelner/UdaciCards.git```
+  `git clone https://github.com/zoelner/UdaciCards.git`
 
 * Instalar dependecias
-```yarn install``` 
+  `yarn install`
 
 * Executar (Android)
-```yarn android```
+  `yarn android`
+
+* Aplicativo testado apenas em Android.
