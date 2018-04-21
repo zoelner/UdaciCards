@@ -13,14 +13,14 @@ class AddQuestion extends Component {
   };
 
   state = {
-    question: null,
-    answer: null
+    question: "",
+    answer: ""
   };
 
   async handleSubmit() {
     const { title } = this.props.navigation.state.params;
     const { question, answer } = this.state;
-    if (!question || !answer) {
+    if (question.trim() === "" || answer.trim() === "") {
       alert("Favor preencher todos os campos!");
       return;
     }
